@@ -1,0 +1,13 @@
+name: InfiniteRanks
+version: '${version}'
+main: com.thepwo.infiniteranks.InfiniteRanks
+api-version: 1.18
+depend: [ Vault ]
+authors: [ TheTrustyPwo ]
+description: Infinite Rankups for your server!
+commands:
+  rankup:
+    description: "Rankup"
+  maxrankup:
+    aliases: [ "rankupmax", "mru" ]
+    description: "Rankup as many times as possible with your balance"

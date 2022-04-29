@@ -1,0 +1,124 @@
+database:
+
+  # MONGODB, YAML
+  type: "YAML"
+
+  # Only if you are using MongoDB
+  mongodb:
+
+    # The Mongo database connection string.
+    # All the data for this plugin is stored via MongoDB and if this is wrong, the plugin will disable itself.
+    mongo-connection-string: ""
+
+    # The Mongo database name to store data
+    mongo-database-name: ""
+
+  # Yaml
+  yaml:
+
+    # Yaml file name
+    file: "data.yml"
+
+# Rankup Algorithm
+algorithm:
+
+  # LINEAR, EXPONENTIAL
+  type: "LINEAR"
+
+  # Linear algorithm is in the form of y=mx+c
+  # where y is the price, m is increase-per-rank, c is base-cost, x is the rank)
+  linear:
+    increase-per-rank: 100
+    base-cost: 100
+
+  # Exponential algorithm s in the form of y=ab^x
+  # where y is the price, a is the initial-amount, b is the growth-decay factor or base, x is the rank
+  exponential:
+    coefficient: 0
+    base: 0
+
+# Rank displays
+# Used to format messages and in placeholders
+displays:
+
+  # ID
+  1:
+    # The range of ranks where this display is used
+    from: 0
+    to: 10
+
+    # The display : string
+    # Variables:
+    # - %rank-raw% ~ The raw rank number without formatting: 100000
+    # - %rank-comma% ~ Rank number formatted with commas: 100,000
+    # - %rank-letter% ~ Rank number formatted with letters: 100k
+    display: "%rank-comma%"
+
+  # Default display if the current rank number does not fit in any of the defined displays
+  default:
+    display: "%rank-comma%"
+
+# Rank rewards
+# Format:
+# Rank number: Command to run
+# Variables:
+# - %player% ~ The name of the player
+rewards:
+  1: "lp user %player% permission set essentials.warps.mine-1"
+  2: "eco give %player% 10"
+
+messages:
+
+  # The message sent when the player does have not permission to do something
+  no-permission:
+    - "&6&lRANKS &8» &eNo permission, only admins can do that!"
+
+  #The message sent when the executor is not a player
+  invalid-executor:
+    - "&6&lRANKS &8» &eInvalid executor, &eyou must be a &6player&e."
+
+  #The message sent when the player enters an invalid usage
+  invalid-usage:
+    - "&6&lRANKS &8» &eInvalid usage, &etry &6%usage%&e."
+
+  # The message sent when the player uses an invalid number as a command argument
+  invalid-number:
+    - "&6&lRANKS &8» &6%number% &eis a invalid number."
+
+  # The message sent when the player uses a negative number as a command argument
+  negative-number:
+    - "&6&lRANKS &8» &6%number% &emust be positive."
+
+  # The message sent when the targeted player is invalid (not in the database)
+  # Variables:
+  # - %player% ~ The targeted player
+  invalid-player:
+    - "&6&lRANKS &8» &eInvalid player, &6%player%&e has never joined the server before."
+
+  # The message sent when the player does not have enough money
+  # Variables:
+  # - %amount% ~ The required amount, which the player does not have
+  not-enough-money:
+    - "&6&lRANKS &8» &eYou don't have enough money to afford that! (Require &6%amount%&e)"
+
+  # The message sent when the player successfully purchases rankup(s) through the /rankup command
+  # Variables:
+  # - %rank-before% ~ The rank before the player executed the command
+  # - %rank-after% ~ The rank after the player executed the command
+  # Note: They are formatted based on their rank display
+  rankup:
+    - " "
+    - " &6&lPurchased Rankup"
+    - " &fYou have unlocked Rank &6%rank-after%&f!"
+    - " "
+
+  # The message sent when the player successfully purchases rankup(s) through the /maxrankup command
+  # Variables:
+  # - %rank-before% ~ The rank before the player executed the command
+  # - %rank-after% ~ The rank after the player executed the command
+  # Note: They are formatted based on their rank display
+  maxrankup:
+    - " "
+    - " &6&lPurchased Rankup"
+    - " &fYou have ranked up from &6%rank-before% &fto &6%rank-after%&f!"
+    - " "
